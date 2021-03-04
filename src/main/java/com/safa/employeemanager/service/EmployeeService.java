@@ -5,8 +5,6 @@ import com.safa.employeemanager.model.Employee;
 import com.safa.employeemanager.repo.EmployeeRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.nio.file.attribute.UserPrincipalNotFoundException;
 import java.util.List;
 import java.util.UUID;
 
@@ -14,7 +12,7 @@ import java.util.UUID;
 public class EmployeeService {
     private final EmployeeRepo employeeRepo;
 
-    @Autowired
+    @Autowired //gonna use the service in the controller, and not directly the repository
     public EmployeeService(EmployeeRepo employeeRepo) {
         this.employeeRepo = employeeRepo;
     }
@@ -33,6 +31,7 @@ public class EmployeeService {
     public void deleteEmployee(Long id){
         employeeRepo.deleteEmployeeById(id);
     }
+
     public Employee findEmployeeById(Long id){
         return employeeRepo.findEmployeeById(id).orElseThrow(() -> new UserNotFoundException("User by id "+id+" was not found"));
     }
